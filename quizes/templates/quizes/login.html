@@ -1,17 +1,28 @@
 {% extends "base1.html" %}
-{% block content %}      
+{% load static %}
 
+{% block content %}
 {% load crispy_forms_tags %}
 
-<!--Login--> 
-<div class="container py-5">
-  <h1>Login</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ login_form|crispy }}
-    <button class="btn btn-primary" type="submit">Login</button>
-  </form>
-  <p class="text-center">Don't have an account? <a href="register">Create an account</a>.</p>
+<!--Login-->
+<br>
+<br>
+<div style="display:flex;">
+  <div style="width:40%; height:60%; margin-top:80px; margin-left: 60px">
+    <img src="{% static 'img/logiin.svg'%}" style="width:100%; height:10%" alt="">
+  </div>
+  <div >
+    <div class="container py-5"
+      style="display:inline-block; background-color:white; margin-top:80px; height:350px; width:420px; margin-left: 50%;">
+      <h1 style="text-align: center;">Login</h1>
+      <form method="POST" style="margin: auto; width: 220px;">
+        {% csrf_token %}
+        {{ login_form|crispy }}
+        <br>
+        <button style="display: block; margin: 0 auto;" class="btn btn-primary" type="submit">Login</button>
+      </form>
+      <p class="text-center">Don't have an account? <a href="register">Create an account</a>.</p>
+    </div>
+  </div>
 </div>
-
 {% endblock %}

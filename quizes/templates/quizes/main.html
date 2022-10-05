@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block scripts %}
-    <script src="{% static 'quizes/main.js' %}" defer></script> 
+<script src="{% static 'quizes/main.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}
@@ -30,47 +30,55 @@ home
   </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="#">Eclipse</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse navbar-right" id="navbarText">
-    <ul class="navbar-nav ms-auto">
-      {% if user.is_authenticated %}
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Welcome, {{user.username}}</a>
-      </li>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <!-- <a class="navbar-brand" href="#">Eclipse</a> -->
+      <a class="navbar-brand" href="index.html">
+        <img src="{% static 'img/logo.png'%}" alt="" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarText">
+        <ul class="navbar-nav ms-auto">
+          <!-- <li class="nav-item">
+            <a style = "color:white;" class="nav-link" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a style = "color:white;" class="nav-link" href="/contact">Contact Us</a>
+          </li> -->
 
-      {% else %}
+          {% if user.is_authenticated %}
 
-      <li class="nav-item navbar-right">
-        <a class="nav-link" href="/login">Login</a>
-      </li>
+          <li class="nav-item">
+            <a style="color:white;" class="nav-link" href="#">Welcome, {{user.username}}</a>
+          </li>
+          <li class="nav-item">
+            <a style="color:white;" class="nav-link" href="/logout">Logout</a>
+          </li>
 
-      {% endif %}
-    </ul>
-  </div>
-</nav>
+          {% else %}
+
+          <li class="nav-item">
+            <a style="color:white;" class="nav-link" href="/login">Login</a>
+          </li>
+
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
 <hr>
-{% for obj in object_list %}
-    <button
-        style="color: black;"
-        class="btn btn-link modal-button"
-        data-pk="{{obj.pk}}"
-        data-quiz="{{obj.name}}"
-        data-questions="{{obj.number_of_questions}}"
-        data-difficulty="{{obj.difficluty}}"
-        data-time="{{obj.time}}"
-        data-pass = "{{obj.required_score_to_pass}}"
-        data-toggle="modal"
-        data-target="#quizStartModal">
-        {{obj.name}}
-    </button><br>
-
+  {% for obj in object_list %}
+  <button type="button" style="color: black; background-color: #fa60cc; width:358px !important; margin-bottom:10px;"
+    class="btn btn-link modal-button btn-lg active" data-pk="{{obj.pk}}" data-quiz="{{obj.name}}"
+    data-questions="{{obj.number_of_questions}}" data-difficulty="{{obj.difficluty}}" data-time="{{obj.time}}"
+    data-pass="{{obj.required_score_to_pass}}" data-toggle="modal" data-target="#quizStartModal">
+    {{obj.name}}
+  </button>
+<br>
 {% endfor %}
 {% endblock content %}

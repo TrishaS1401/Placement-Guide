@@ -107,27 +107,27 @@ const sendData = () => {
 
             if (response.score >= 50 && response.score <= 60)
             {
-                company = "Company Predicted: Deloitte"
+                company = "Company Predicted: Deloitte."
             }
             else if (response.score > 60 && response.score <= 70)
             {
-                company = "Company Predicted: ICICI Lombard"
+                company = "Company Predicted: ICICI Lombard."
             }
             else if (response.score > 70 && response.score <= 80)
             {
-                company = "Company Predicted: UBS"
+                company = "Company Predicted: UBS."
             }
             else if (response.score > 80 && response.score <= 90)
             {
-                company = "Company Predicted: Morgan Stanley"
+                company = "Company Predicted: Morgan Stanley."
             }
             else if (response.score > 90)
             {
-                company = "Company Predicted: Deutsche Bank"
+                company = "Company Predicted: Deutsche Bank."
             }
             quizForm.classList.add('not-visible')
 
-            scoreBox.innerHTML = `${response.passed ? `Congratulations! ${company} ` : 'Ups..:( '}Your result is ${response.score.toFixed(2)}%`
+            scoreBox.innerHTML = `${response.passed ? `Congratulations! Your result is ${response.score.toFixed(2)}%. ${company} ` : `Ups..:( Your result is ${response.score.toFixed(2)}%`}%`
 
             //scoreBox.innerHTML += `${company}`
             console.log(company)
