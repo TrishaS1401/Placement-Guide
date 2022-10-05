@@ -88,7 +88,6 @@ def save_quiz_view(request, pk):
 def home(request):
     return render(request, "quizes/home.html")
 
-
 def contact(request):
     return render(request, "quizes/contact.html")
     
