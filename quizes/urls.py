@@ -9,7 +9,8 @@ from .views import (
     login_request,
     register_request,
     logout_request,
-    contact
+    contact,
+    certificate
 )
 
 app_name = 'quizes'
@@ -19,6 +20,7 @@ urlpatterns = [
     path('login',login_request, name ="login"),
     path('register', register_request, name ="register"),
     path('contact', contact, name ="contact"),
+    path('certificate', certificate, name='certificate'),
     path('logout', logout_request, name= "logout"),
     path('', QuizListView.as_view(), name='main-view'),
     path('<pk>/', quiz_view, name='quiz-view'),

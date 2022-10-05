@@ -2,6 +2,7 @@ const url = window.location.href
 
 const quizBox = document.getElementById('quiz-box')
 const scoreBox = document.getElementById('score-box')
+const certificateBox = document.getElementById('certificate-box')
 const resultBox = document.getElementById('result-box')
 const timerBox = document.getElementById('timer-box')
 
@@ -127,8 +128,10 @@ const sendData = () => {
             }
             quizForm.classList.add('not-visible')
 
-            scoreBox.innerHTML = `${response.passed ? `Congratulations! Your result is ${response.score.toFixed(2)}%. ${company} ` : `Ups..:( Your result is ${response.score.toFixed(2)}%`}%`
-
+            scoreBox.innerHTML = `${response.passed ? `Congratulations! Your result is ${response.score.toFixed(2)}%. ${company} ` : `Ups..:( Your result is ${response.score.toFixed(2)}%`}`
+            certificateBox.innerHTML = `
+            <div><a href="{% url 'quizes:certificate' %}" class="btn btn-primary">Certificate</a><br></br></div>
+            `
             //scoreBox.innerHTML += `${company}`
             console.log(company)
 
@@ -155,9 +158,11 @@ const sendData = () => {
                             resDiv.classList.add('bg-danger')
                             resDiv.innerHTML += ` | correct answer: ${correct}`
                             resDiv.innerHTML += ` | answered: ${answer}`
+                            
                         }
                     }
                 }
+               
                 resultBox.append(resDiv)
             })
         },

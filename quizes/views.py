@@ -92,6 +92,8 @@ def home(request):
 def contact(request):
     return render(request, "quizes/contact.html")
     
+def certificate(request):
+    return render(request, "quizes/certificate.html")
 
 def login_request(request):
 	if request.method == "POST":
@@ -130,3 +132,4 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.") 
     return redirect("quizes:main-view")
+
