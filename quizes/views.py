@@ -4,6 +4,15 @@ from django.views.generic import ListView
 from django.http import JsonResponse
 from questions.models import Question, Answer
 from results.models import Result
+from django.shortcuts import HttpResponse
+from django.shortcuts import render,redirect
+from django.contrib.auth.models import User
+from django.contrib import auth
+from .forms import NewUserForm
+from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+
 
 class QuizListView(ListView):
     model = Quiz 
@@ -25,9 +34,11 @@ def quiz_data_view(request, pk):
         'data': questions,
         'time': quiz.time,
     })
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 def save_quiz_view(request, pk):
-    if request.is_ajax():
+    if is_ajax(request=request):
         questions = []
         data = request.POST
         data_ = dict(data.lists())
@@ -73,3 +84,45 @@ def save_quiz_view(request, pk):
             return JsonResponse({'passed': True, 'score': score_, 'results': results})
         else:
             return JsonResponse({'passed': False, 'score': score_, 'results': results})
+
+def home(request):
+    return render(request, "quizes/home.html")
+    
+
+def login_request(request):
+	if request.method == "POST":
+		form = AuthenticationForm(request, data=request.POST)
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+			password = form.cleaned_data.get('password')
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				login(request, user)
+				messages.info(request, f"You are now logged in as {username}.")
+				return redirect("quizes:main-view")
+			else:
+				messages.error(request,"Invalid username or password.")
+		else:
+			messages.error(request,"Invalid username or password.")
+	form = AuthenticationForm()
+	return render(request=request, template_name="quizes/login.html", context={"login_form":form})
+    
+    
+
+
+def register_request(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect("quizes:main-view")
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	form = NewUserForm()
+	return render (request=request, template_name="quizes/register.html", context={"register_form":form})
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.") 
+    return redirect("quizes:main-view")
