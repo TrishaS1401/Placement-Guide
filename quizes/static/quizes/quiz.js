@@ -130,7 +130,7 @@ const sendData = () => {
 
             scoreBox.innerHTML = `${response.passed ? `Congratulations! Your result is ${response.score.toFixed(2)}%. ${company} ` : `Ups..:( Your result is ${response.score.toFixed(2)}%`}`
             certificateBox.innerHTML = `${response.passed ?
-            `<br><div><a href="http://127.0.0.1:8000/certificate" class="btn btn-primary">Certificate</a><br></br></div> ` : ``}
+            `<br><div><a href="http://127.0.0.1:8000/certificate" class="btn btn-primary">Scorecard</a><br></br></div> ` : ``}
             `
             //scoreBox.innerHTML += `${company}`
             console.log(company)
