@@ -73,12 +73,12 @@ home
 </header>
 <hr>
   {% for obj in object_list %}
-  <button type="button" style="color: black; background-color: #e67daa; width:358px !important; margin-bottom:10px;"
+  <button type="button" style="color: black; background-color: #e67daa; width:300px !important; margin-top:10px;margin-bottom:30px; margin-left:30px; margin-right:30px;"
     class="btn btn-link modal-button btn-lg active" data-pk="{{obj.pk}}" data-quiz="{{obj.name}}"
     data-questions="{{obj.number_of_questions}}" data-difficulty="{{obj.difficluty}}" data-time="{{obj.time}}"
     data-pass="{{obj.required_score_to_pass}}" data-toggle="modal" data-target="#quizStartModal">
     {{obj.name}}
   </button>
-<br>
+<!-- <br> -->
 {% endfor %}
 {% endblock content %}
